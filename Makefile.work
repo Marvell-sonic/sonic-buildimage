@@ -1,5 +1,5 @@
 ###############################################################################
-## Wrapper for starting make inside sonic-slave container
+## Wrapper for starting make inside sonic-slave
 #
 #  Supported parameters:
 #
