@@ -378,10 +378,17 @@ class SonicYangExtMixin:
         #choices, this is tricky, since leafs are under cases in tree.
         choices = model.get('choice')
         if choices:
-            for choice in choices:
-                cases = choice['case']
+            # If single choice exists in container/list
+            if isinstance(choices, dict):
+                cases = choices['case']
                 for case in cases:
                     self._fillLeafDict(case.get('leaf'), leafDict)
+            # If multiple choices exist in container/list
+            else:
+                for choice in choices:
+                    cases = choice['case']
+                    for case in cases:
+                        self._fillLeafDict(case.get('leaf'), leafDict)
 
         # leaf-lists
         self._fillLeafDict(model.get('leaf-list'), leafDict, True)
